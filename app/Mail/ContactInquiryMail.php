@@ -12,7 +12,7 @@ class ContactInquiryMail extends Mailable
     use Queueable;
 
     /**
-     * @param array{name: string, scope: string, budget: string, message: string} $inquiry
+     * @param array{name: string, scope: string, budget: string, message: string, locale: string} $inquiry
      */
     public function __construct(public array $inquiry)
     {
@@ -20,8 +20,10 @@ class ContactInquiryMail extends Mailable
 
     public function envelope(): Envelope
     {
+        $locale = $this->inquiry['locale'] ?? config('app.fallback_locale', 'en');
+
         return new Envelope(
-            subject: 'New Tekvero inquiry: '.$this->inquiry['name'],
+            subject: __('contact.email.subject', ['name' => $this->inquiry['name']], $locale),
         );
     }
 

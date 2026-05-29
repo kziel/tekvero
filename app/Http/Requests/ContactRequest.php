@@ -33,7 +33,13 @@ class ContactRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'website.max' => 'Spam check failed. Please try again.',
+            'name.required' => __('contact.validation.name_required'),
+            'scope.required' => __('contact.validation.scope_required'),
+            'scope.in' => __('contact.validation.scope_in'),
+            'budget.required' => __('contact.validation.budget_required'),
+            'message.required' => __('contact.validation.message_required'),
+            'message.min' => __('contact.validation.message_min'),
+            'website.max' => __('contact.errors.spam'),
         ];
     }
 }

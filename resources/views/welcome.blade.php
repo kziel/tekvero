@@ -1,31 +1,47 @@
+@php
+    $locale = app()->getLocale();
+    $switchLocale = $locale === 'pl' ? 'en' : 'pl';
+
+    $canonicalUrl = route('landing', ['locale' => $locale]);
+    $plUrl = route('landing', ['locale' => 'pl']);
+    $enUrl = route('landing', ['locale' => 'en']);
+
+    $manifestCards = trans('landing.manifest.cards');
+    $serviceCards = trans('landing.services.cards');
+    $heroPoints = trans('landing.hero.side_points');
+@endphp
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', $locale) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Tekvero | Engineering-grade web production</title>
-        <meta name="description" content="Tekvero builds engineering-grade landing pages and business websites with predictable delivery, validated code, and measurable conversion outcomes." />
-        <link rel="canonical" href="{{ url('/') }}" />
+        <title>{{ __('landing.meta.title') }}</title>
+        <meta name="description" content="{{ __('landing.meta.description') }}" />
+        <link rel="canonical" href="{{ $canonicalUrl }}" />
         <meta name="robots" content="index,follow" />
+
+        <link rel="alternate" href="{{ $plUrl }}" hreflang="pl" />
+        <link rel="alternate" href="{{ $enUrl }}" hreflang="en" />
+        <link rel="alternate" href="{{ $plUrl }}" hreflang="x-default" />
 
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Tekvero" />
-        <meta property="og:title" content="Tekvero | Engineering-grade web production" />
-        <meta property="og:description" content="Single-page and business website production with predictable delivery and technical reliability." />
-        <meta property="og:url" content="{{ url('/') }}" />
+        <meta property="og:title" content="{{ __('landing.meta.title') }}" />
+        <meta property="og:description" content="{{ __('landing.meta.og_description') }}" />
+        <meta property="og:url" content="{{ $canonicalUrl }}" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Tekvero | Engineering-grade web production" />
-        <meta name="twitter:description" content="Landing page and website production focused on delivery speed, quality, and conversion." />
+        <meta name="twitter:title" content="{{ __('landing.meta.title') }}" />
+        <meta name="twitter:description" content="{{ __('landing.meta.twitter_description') }}" />
 
         <script type="application/ld+json">
             {!! json_encode([
                 '@context' => 'https://schema.org',
                 '@type' => 'Organization',
                 'name' => 'Tekvero',
-                'url' => url('/'),
-                'description' => 'Engineering-grade web production for landing pages and business websites.',
+                'url' => $canonicalUrl,
+                'description' => __('landing.schema.description'),
             ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
         </script>
 
@@ -33,24 +49,35 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body id="top" class="antialiased">
-        <a href="#main-content" class="tv-skip-link">Skip to main content</a>
+        <a href="#main-content" class="tv-skip-link">{{ __('landing.a11y.skip_to_content') }}</a>
 
         <header class="tv-container pt-8 lg:pt-10">
             <div class="tv-panel flex items-center justify-between rounded-2xl px-5 py-4 lg:px-7">
                 <x-logo />
-                <nav class="hidden items-center gap-8 text-sm text-slate-300 lg:flex" aria-label="Main navigation">
-                    <a href="#manifest" class="transition-colors hover:text-emerald-300">Why Tekvero</a>
-                    <a href="#services" class="transition-colors hover:text-emerald-300">Services</a>
-                    <a href="#stack" class="transition-colors hover:text-emerald-300">Stack</a>
-                    <a href="#contact" class="transition-colors hover:text-emerald-300">Contact</a>
-                </nav>
+                <div class="flex items-center gap-3">
+                    <a
+                        href="{{ route('landing', ['locale' => $switchLocale]) }}"
+                        data-language-switch
+                        class="rounded-full border border-slate-500 px-4 py-2 text-xs font-semibold text-slate-100 hover:border-emerald-500 hover:text-emerald-300"
+                        aria-label="{{ __('landing.language.switch_label') }}"
+                    >
+                        {{ __('landing.language.switch_to') }}
+                    </a>
+
+                    <nav class="hidden items-center gap-8 text-sm text-slate-300 lg:flex" aria-label="{{ __('landing.a11y.main_nav') }}">
+                        <a href="#manifest" class="transition-colors hover:text-emerald-300">{{ __('landing.nav.why') }}</a>
+                        <a href="#services" class="transition-colors hover:text-emerald-300">{{ __('landing.nav.services') }}</a>
+                        <a href="#stack" class="transition-colors hover:text-emerald-300">{{ __('landing.nav.stack') }}</a>
+                        <a href="#contact" class="transition-colors hover:text-emerald-300">{{ __('landing.nav.contact') }}</a>
+                    </nav>
+                </div>
             </div>
 
-            <nav class="mt-4 flex flex-wrap gap-2 lg:hidden" aria-label="Mobile navigation">
-                <a href="#manifest" class="rounded-full border border-slate-600 px-4 py-2 text-xs font-medium text-slate-200">Why Tekvero</a>
-                <a href="#services" class="rounded-full border border-slate-600 px-4 py-2 text-xs font-medium text-slate-200">Services</a>
-                <a href="#stack" class="rounded-full border border-slate-600 px-4 py-2 text-xs font-medium text-slate-200">Stack</a>
-                <a href="#contact" class="rounded-full border border-emerald-500 px-4 py-2 text-xs font-medium text-emerald-300">Contact</a>
+            <nav class="mt-4 flex flex-wrap gap-2 lg:hidden" aria-label="{{ __('landing.a11y.mobile_nav') }}">
+                <a href="#manifest" class="rounded-full border border-slate-600 px-4 py-2 text-xs font-medium text-slate-200">{{ __('landing.nav.why') }}</a>
+                <a href="#services" class="rounded-full border border-slate-600 px-4 py-2 text-xs font-medium text-slate-200">{{ __('landing.nav.services') }}</a>
+                <a href="#stack" class="rounded-full border border-slate-600 px-4 py-2 text-xs font-medium text-slate-200">{{ __('landing.nav.stack') }}</a>
+                <a href="#contact" class="rounded-full border border-emerald-500 px-4 py-2 text-xs font-medium text-emerald-300">{{ __('landing.nav.contact') }}</a>
             </nav>
         </header>
 
@@ -59,32 +86,24 @@
                 <div class="tv-container">
                     <div class="tv-panel grid gap-10 rounded-3xl px-6 py-12 md:px-10 lg:grid-cols-[1.2fr_0.8fr] lg:px-12 lg:py-14">
                         <div class="space-y-8">
-                            <p class="tv-eyebrow">Tekvero Digital Production</p>
-                            <h1 class="tv-h1">Engineering-grade web production. Delivered on time.</h1>
-                            <p class="tv-intro max-w-2xl">
-                                We design and ship landing pages that perform under real business pressure. You get transparent milestones, fast feedback loops, and code that is ready for long-term maintenance.
-                            </p>
+                            <p class="tv-eyebrow">{{ __('landing.hero.eyebrow') }}</p>
+                            <h1 class="tv-h1">{{ __('landing.hero.title') }}</h1>
+                            <p class="tv-intro max-w-2xl">{{ __('landing.hero.intro') }}</p>
                             <div class="flex flex-wrap gap-4">
-                                <x-cta-button href="#contact">Get a Free Estimate</x-cta-button>
-                                <x-cta-button href="#manifest" variant="secondary">See Our Approach</x-cta-button>
+                                <x-cta-button href="#contact">{{ __('landing.hero.cta_primary') }}</x-cta-button>
+                                <x-cta-button href="#manifest" variant="secondary">{{ __('landing.hero.cta_secondary') }}</x-cta-button>
                             </div>
                         </div>
 
                         <aside class="tv-card space-y-6">
-                            <p class="text-sm uppercase tracking-[0.22em] text-slate-400">Why teams choose Tekvero</p>
+                            <p class="text-sm uppercase tracking-[0.22em] text-slate-400">{{ __('landing.hero.side_title') }}</p>
                             <ul class="space-y-3 text-slate-200">
-                                <li class="flex items-start gap-3">
-                                    <span class="mt-2 h-2 w-2 rounded-full bg-emerald-400"></span>
-                                    <span>Delivery plans are explicit, time-boxed, and visible from day one.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <span class="mt-2 h-2 w-2 rounded-full bg-emerald-400"></span>
-                                    <span>Design choices are made for conversion, not decoration.</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <span class="mt-2 h-2 w-2 rounded-full bg-emerald-400"></span>
-                                    <span>Every release is validated for quality, accessibility, and speed.</span>
-                                </li>
+                                @foreach ($heroPoints as $point)
+                                    <li class="flex items-start gap-3">
+                                        <span class="mt-2 h-2 w-2 rounded-full bg-emerald-400"></span>
+                                        <span>{{ $point }}</span>
+                                    </li>
+                                @endforeach
                             </ul>
                         </aside>
                     </div>
@@ -93,35 +112,35 @@
 
             <x-section
                 id="manifest"
-                eyebrow="Why Tekvero"
-                title="Execution over noise"
-                intro="Our operating model is simple: fewer promises, clearer standards, better outcomes."
+                :eyebrow="__('landing.manifest.eyebrow')"
+                :title="__('landing.manifest.title')"
+                :intro="__('landing.manifest.intro')"
             >
                 <div class="grid gap-6 md:grid-cols-3">
-                    <x-card title="Predictable Pace" body="Weekly delivery checkpoints, clear definitions of done, and no hidden scope drift." />
-                    <x-card title="Frictionless Collaboration" body="Decisions are documented fast, feedback loops stay short, and communication remains actionable." />
-                    <x-card title="Validated Code" body="Performance, accessibility, and maintainability are part of the build, not post-launch cleanup." />
+                    @foreach ($manifestCards as $card)
+                        <x-card :title="$card['title']" :body="$card['body']" />
+                    @endforeach
                 </div>
             </x-section>
 
             <x-section
                 id="services"
-                eyebrow="Services Grid"
-                title="Services built for measurable outcomes"
-                intro="From first draft to production publish, each service is optimized for business conversion and delivery reliability."
+                :eyebrow="__('landing.services.eyebrow')"
+                :title="__('landing.services.title')"
+                :intro="__('landing.services.intro')"
             >
                 <div class="grid gap-6 md:grid-cols-3">
-                    <x-card title="Landing Page Production" body="Conversion-first pages with strong technical SEO, structured messaging, and responsive polish." />
-                    <x-card title="Boutique Business Sites" body="Credible, high-trust websites for teams that need a clean and maintainable digital presence." />
-                    <x-card title="Performance Optimization" body="Targeted improvements to Core Web Vitals, render path, and usability bottlenecks on existing builds." />
+                    @foreach ($serviceCards as $card)
+                        <x-card :title="$card['title']" :body="$card['body']" />
+                    @endforeach
                 </div>
             </x-section>
 
             <x-section
                 id="stack"
-                eyebrow="Tech Stack"
-                title="Trusted production toolkit"
-                intro="The stack is intentionally lean: fast build cycles, stable runtime behavior, and low operational overhead."
+                :eyebrow="__('landing.stack.eyebrow')"
+                :title="__('landing.stack.title')"
+                :intro="__('landing.stack.intro')"
             >
                 <div class="tv-panel rounded-2xl p-6 lg:p-8">
                     <div class="flex flex-wrap gap-3 text-sm font-medium text-slate-100">
@@ -136,9 +155,9 @@
 
             <x-section
                 id="contact"
-                eyebrow="Contact"
-                title="Start your project brief"
-                intro="Share scope, budget, and timeline. We respond with a practical delivery path, not a generic sales script."
+                :eyebrow="__('landing.contact.eyebrow')"
+                :title="__('landing.contact.title')"
+                :intro="__('landing.contact.intro')"
             >
                 <div class="tv-panel rounded-3xl p-6 lg:p-10">
                     @if (session('contact_success'))
@@ -153,49 +172,66 @@
                         </div>
                     @enderror
 
-                    <form class="grid gap-6 md:grid-cols-2" aria-describedby="contact-status" method="POST" action="{{ route('contact.submit') }}" novalidate>
+                    <form class="grid gap-6 md:grid-cols-2" aria-describedby="contact-status" method="POST" action="{{ route('contact.submit', ['locale' => $locale]) }}" novalidate>
                         @csrf
                         <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
                         <div class="space-y-2">
-                            <label class="text-sm text-slate-300" for="name">Name / Company</label>
-                            <input id="name" name="name" type="text" value="{{ old('name') }}" class="w-full rounded-xl border border-slate-600 bg-slate-900/60 px-4 py-3 text-slate-100 outline-none ring-0 transition focus:border-emerald-400" placeholder="Acme Inc." autocomplete="organization" required />
+                            <label class="text-sm text-slate-300" for="name">{{ __('landing.contact.labels.name') }}</label>
+                            <input id="name" name="name" type="text" value="{{ old('name') }}" class="w-full rounded-xl border border-slate-600 bg-slate-900/60 px-4 py-3 text-slate-100 outline-none ring-0 transition focus:border-emerald-400" placeholder="{{ __('landing.contact.placeholders.name') }}" autocomplete="organization" required />
                             @error('name')
                                 <p class="text-sm text-rose-300" role="alert">{{ $message }}</p>
                             @enderror
                         </div>
+
                         <div class="space-y-2">
-                            <label class="text-sm text-slate-300" for="scope">Project Scope</label>
+                            <label class="text-sm text-slate-300" for="scope">{{ __('landing.contact.labels.scope') }}</label>
                             <select id="scope" name="scope" class="w-full rounded-xl border border-slate-600 bg-slate-900/60 px-4 py-3 text-slate-100 outline-none ring-0 transition focus:border-emerald-400" required>
-                                <option value="new-landing-page" @selected(old('scope') === 'new-landing-page')>New Landing Page</option>
-                                <option value="website-redesign" @selected(old('scope') === 'website-redesign')>Website Redesign</option>
-                                <option value="other" @selected(old('scope') === 'other')>Other</option>
+                                <option value="new-landing-page" @selected(old('scope') === 'new-landing-page')>{{ __('contact.scopes.new-landing-page') }}</option>
+                                <option value="website-redesign" @selected(old('scope') === 'website-redesign')>{{ __('contact.scopes.website-redesign') }}</option>
+                                <option value="other" @selected(old('scope') === 'other')>{{ __('contact.scopes.other') }}</option>
                             </select>
                             @error('scope')
                                 <p class="text-sm text-rose-300" role="alert">{{ $message }}</p>
                             @enderror
                         </div>
+
                         <div class="space-y-2">
-                            <label class="text-sm text-slate-300" for="budget">Budget Range</label>
-                            <input id="budget" name="budget" type="text" value="{{ old('budget') }}" class="w-full rounded-xl border border-slate-600 bg-slate-900/60 px-4 py-3 text-slate-100 outline-none ring-0 transition focus:border-emerald-400" placeholder="10k-25k PLN" autocomplete="off" required />
+                            <label class="text-sm text-slate-300" for="budget">{{ __('landing.contact.labels.budget') }}</label>
+                            <input id="budget" name="budget" type="text" value="{{ old('budget') }}" class="w-full rounded-xl border border-slate-600 bg-slate-900/60 px-4 py-3 text-slate-100 outline-none ring-0 transition focus:border-emerald-400" placeholder="{{ __('landing.contact.placeholders.budget') }}" autocomplete="off" required />
                             @error('budget')
                                 <p class="text-sm text-rose-300" role="alert">{{ $message }}</p>
                             @enderror
                         </div>
+
                         <div class="space-y-2 md:col-span-2">
-                            <label class="text-sm text-slate-300" for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" class="w-full rounded-xl border border-slate-600 bg-slate-900/60 px-4 py-3 text-slate-100 outline-none ring-0 transition focus:border-emerald-400" placeholder="Tell us about your timeline, goals, and current constraints." autocomplete="off" required>{{ old('message') }}</textarea>
+                            <label class="text-sm text-slate-300" for="message">{{ __('landing.contact.labels.message') }}</label>
+                            <textarea id="message" name="message" rows="5" class="w-full rounded-xl border border-slate-600 bg-slate-900/60 px-4 py-3 text-slate-100 outline-none ring-0 transition focus:border-emerald-400" placeholder="{{ __('landing.contact.placeholders.message') }}" autocomplete="off" required>{{ old('message') }}</textarea>
                             @error('message')
                                 <p class="text-sm text-rose-300" role="alert">{{ $message }}</p>
                             @enderror
                         </div>
+
                         <div class="md:col-span-2 flex flex-wrap items-center gap-4">
-                            <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-emerald-400 transition-colors sm:w-auto">Send Inquiry</button>
-                            <p id="contact-status" class="text-sm text-slate-400">Response target: within one business day.</p>
+                            <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-emerald-400 transition-colors sm:w-auto">{{ __('landing.contact.submit') }}</button>
+                            <p id="contact-status" class="text-sm text-slate-400">{{ __('landing.contact.status') }}</p>
                         </div>
                     </form>
                 </div>
             </x-section>
         </main>
+
+        <script>
+            document.querySelectorAll('[data-language-switch]').forEach((link) => {
+                link.addEventListener('click', (event) => {
+                    if (!window.location.hash) {
+                        return;
+                    }
+
+                    event.preventDefault();
+                    window.location.href = link.getAttribute('href') + window.location.hash;
+                });
+            });
+        </script>
     </body>
 </html>

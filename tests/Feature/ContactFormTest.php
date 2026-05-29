@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Mail;
 it('submits contact form successfully', function () {
     Mail::fake();
 
-    $response = $this->post('/contact', [
+    $response = $this->post('/pl/contact', [
         'name' => 'Acme Sp. z o.o.',
         'scope' => 'new-landing-page',
         'budget' => '10k-25k PLN',
@@ -15,7 +15,7 @@ it('submits contact form successfully', function () {
     ]);
 
     $response
-        ->assertRedirect('/')
+        ->assertRedirect('/pl')
         ->assertSessionHas('contact_success')
         ->assertSessionHasNoErrors();
 
@@ -27,7 +27,7 @@ it('submits contact form successfully', function () {
 it('rejects honeypot submissions', function () {
     Mail::fake();
 
-    $response = $this->from('/')->post('/contact', [
+    $response = $this->from('/pl')->post('/pl/contact', [
         'name' => 'Spam Bot',
         'scope' => 'other',
         'budget' => '0',
@@ -36,7 +36,7 @@ it('rejects honeypot submissions', function () {
     ]);
 
     $response
-        ->assertRedirect('/')
+        ->assertRedirect('/pl')
         ->assertSessionHasErrors(['website']);
 
     Mail::assertNothingSent();
@@ -45,7 +45,7 @@ it('rejects honeypot submissions', function () {
 it('validates required fields', function () {
     Mail::fake();
 
-    $response = $this->from('/')->post('/contact', [
+    $response = $this->from('/pl')->post('/pl/contact', [
         'name' => '',
         'scope' => '',
         'budget' => '',
@@ -54,7 +54,7 @@ it('validates required fields', function () {
     ]);
 
     $response
-        ->assertRedirect('/')
+        ->assertRedirect('/pl')
         ->assertSessionHasErrors(['name', 'scope', 'budget', 'message']);
 
     Mail::assertNothingSent();
@@ -72,10 +72,28 @@ it('throttles repeated contact submissions', function () {
     ];
 
     for ($attempt = 1; $attempt <= 5; $attempt++) {
-        $this->post('/contact', $payload)->assertRedirect('/');
+        $this->post('/pl/contact', $payload)->assertRedirect('/pl');
     }
 
-    $this->post('/contact', $payload)->assertStatus(429);
+    $this->post('/pl/contact', $payload)->assertStatus(429);
 
     Mail::assertSent(ContactInquiryMail::class, 5);
+});
+
+it('submits contact form on english route', function () {
+    Mail::fake();
+
+    $response = $this->post('/en/contact', [
+        'name' => 'Acme Ltd',
+        'scope' => 'other',
+        'budget' => '5k-10k EUR',
+        'message' => 'We need technical support in improving our conversion performance for an existing page.',
+        'website' => '',
+    ]);
+
+    $response
+        ->assertRedirect('/en')
+        ->assertSessionHas('contact_success');
+
+    Mail::assertSent(ContactInquiryMail::class, 1);
 });
