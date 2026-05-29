@@ -1,58 +1,118 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Tekvero Website
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Single-page marketing website for tekvero.pl, built with Laravel Blade and Tailwind CSS.
 
-## About Laravel
+## Project Goal
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Deliver a high-performance, engineering-focused landing page that communicates reliability, clean execution, and fast collaboration.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Current Delivery Status
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Phase 1 complete: Laravel project baseline and local environment are running.
+- Phase 2 complete: design tokens, reusable Blade components, and section scaffold are implemented.
+- Phase 3 in progress: final copy, section refinement, and contact backend wiring.
+- CI/CD intentionally deferred until page delivery is complete.
 
-## Learning Laravel
+## Architecture
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Backend: Laravel 13 + Blade
+- Frontend: Tailwind CSS 4 + Vanilla JavaScript
+- Database (local default): MySQL
+- Planned production stack: MySQL + Redis + SMTP on iqhost.pl
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Visual Direction
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- Canvas: #0F172A
+- Accent: #10B981
+- High-contrast text: #F8FAFC
+- Muted text: #64748B
+- Layout style: single-page, conversion-first, low cognitive load
 
-## Agentic Development
+## Local Setup
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### Prerequisites
+
+- PHP 8.3+
+- Composer
+- Node.js and npm
+- MySQL running locally
+
+### First-time Setup
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Run Locally
 
-## Contributing
+Use two terminals.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Terminal 1:
 
-## Code of Conduct
+```bash
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Terminal 2:
 
-## Security Vulnerabilities
+```bash
+npm run dev
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Open:
 
-## License
+- http://127.0.0.1:8000
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Useful Commands
+
+Run tests:
+
+```bash
+php artisan test
+```
+
+Build production assets:
+
+```bash
+npm run build
+```
+
+## Troubleshooting
+
+If pages fail with database or session errors:
+
+```bash
+php artisan migrate
+```
+
+If environment changes are not reflected:
+
+```bash
+php artisan config:clear
+```
+
+If frontend assets are missing:
+
+```bash
+npm run build
+```
+
+## Key Project Files
+
+- Landing page template: resources/views/welcome.blade.php
+- Reusable UI components: resources/views/components/
+- Design tokens and UI styles: resources/css/app.css
+- Routes: routes/web.php
+- Deployment helper scripts: scripts/
+- Planning artifacts: artifact-02 through artifact-10 markdown files
+
+## Next Product Work
+
+- Finalize production copy in all sections
+- Implement contact form backend (validation, honeypot, rate limit, mail fallback)
+- Add focused feature tests for contact flow
+- Perform accessibility and Lighthouse optimization pass
