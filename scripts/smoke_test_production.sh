@@ -9,6 +9,8 @@ fi
 APP_URL="${APP_URL%/}"
 FORM_SMOKE_URL="${FORM_SMOKE_URL:-}"
 ASSET_MANIFEST_PATH="${ASSET_MANIFEST_PATH:-/build/manifest.json}"
+LOCALE_PATHS="${LOCALE_PATHS:-/pl,/en}"
+SITEMAP_PATH="${SITEMAP_PATH:-/sitemap.xml}"
 
 failures=0
 
@@ -37,8 +39,14 @@ check_status() {
   fi
 }
 
-check_status "Homepage" "$APP_URL" "200"
+check_status "Homepage" "$APP_URL" "200,301,302"
+IFS=',' read -r -a locale_paths <<< "$LOCALE_PATHS"
+for path in "${locale_paths[@]}"; do
+  check_status "Localized page $path" "$APP_URL$path" "200"
+done
+
 check_status "Asset manifest" "$APP_URL$ASSET_MANIFEST_PATH" "200"
+check_status "Sitemap" "$APP_URL$SITEMAP_PATH" "200"
 
 if [[ -n "$FORM_SMOKE_URL" ]]; then
   # Form endpoints vary by CSRF/auth policy; these statuses usually indicate route exists.

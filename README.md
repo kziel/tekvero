@@ -8,10 +8,11 @@ Deliver a high-performance, engineering-focused landing page that communicates r
 
 ## Current Delivery Status
 
-- Phase 1 complete: Laravel project baseline and local environment are running.
-- Phase 2 complete: design tokens, reusable Blade components, and section scaffold are implemented.
-- Phase 3 in progress: final copy, section refinement, and contact backend wiring.
-- CI/CD intentionally deferred until page delivery is complete.
+- Phase 1 complete: Laravel baseline and local environment are stable.
+- Phase 2 complete: branded UI system, responsive sections, and accessibility foundations are implemented.
+- Phase 3 complete: contact backend with validation, honeypot, throttling, and localized mail pipeline.
+- Phase 4 complete: SEO metadata, sitemap, smoke checks, and release hardening are in place.
+- Multilingual launch complete: Polish and English routes at `/pl` and `/en` with locale cookie + browser-language redirect.
 
 ## Architecture
 
@@ -81,6 +82,27 @@ Build production assets:
 npm run build
 ```
 
+Run production smoke checks:
+
+```bash
+APP_URL=https://tekvero.pl bash scripts/smoke_test_production.sh
+```
+
+Run release profile smoke checks (multilingual defaults):
+
+```bash
+APP_URL=https://tekvero.pl bash scripts/smoke_test_release_profile.sh
+```
+
+Optional smoke overrides:
+
+```bash
+FORM_PATH=/pl/contact
+LOCALE_PATHS=/pl,/en
+ASSET_MANIFEST_PATH=/build/manifest.json
+SITEMAP_PATH=/sitemap.xml
+```
+
 ## Troubleshooting
 
 If pages fail with database or session errors:
@@ -107,12 +129,15 @@ npm run build
 - Reusable UI components: resources/views/components/
 - Design tokens and UI styles: resources/css/app.css
 - Routes: routes/web.php
+- Locale middleware: app/Http/Middleware/SetLocale.php
 - Deployment helper scripts: scripts/
+- CI workflow: .github/workflows/release-validation.yml
 - Planning artifacts: artifact-02 through artifact-10 markdown files
 
-## Next Product Work
+## Release Validation
 
-- Finalize production copy in all sections
-- Implement contact form backend (validation, honeypot, rate limit, mail fallback)
-- Add focused feature tests for contact flow
-- Perform accessibility and Lighthouse optimization pass
+- CI runs test + build validation on push/PR via `.github/workflows/release-validation.yml`.
+- Local regression baseline:
+	- `php artisan test`
+	- `npm run build`
+	- `APP_URL=<target> bash scripts/smoke_test_release_profile.sh`

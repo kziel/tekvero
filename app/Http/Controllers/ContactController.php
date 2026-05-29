@@ -13,8 +13,11 @@ class ContactController extends Controller
 {
     public function store(ContactRequest $request): RedirectResponse
     {
-        /** @var array{name: string, scope: string, budget: string, message: string} $payload */
+        $locale = (string) $request->route('locale', app()->getLocale());
+
+        /** @var array{name: string, scope: string, budget: string, message: string, locale: string} $payload */
         $payload = $request->safe()->except('website');
+        $payload['locale'] = $locale;
 
         try {
             Mail::to((string) config('mail.from.address'))->send(new ContactInquiryMail($payload));
@@ -24,13 +27,14 @@ class ContactController extends Controller
                 'ip' => $request->ip(),
             ]);
 
-            return redirect('/')
+            return redirect()->route('landing', ['locale' => $locale])
                 ->withInput($request->except('website'))
                 ->withErrors([
-                    'contact' => 'Your message could not be delivered right now. Please try again in a moment.',
+                    'contact' => __('contact.errors.delivery_failed', locale: $locale),
                 ]);
         }
 
-        return redirect('/')->with('contact_success', 'Thanks! Your inquiry has been received. We will get back to you soon.');
+        return redirect()->route('landing', ['locale' => $locale])
+            ->with('contact_success', __('contact.success.submitted', locale: $locale));
     }
 }
