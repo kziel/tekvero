@@ -1,7 +1,7 @@
-# Tekvero Landing Page Creation Plan (Phased)
+# TekVero Landing Page Creation Plan (Phased)
 
 ## Goal
-Launch a high-performance, single-page marketing site for Tekvero (tekvero.pl) that reflects the "True Tech" brand promise: clean execution, transparent collaboration, and reliable delivery.
+Launch a high-performance, single-page marketing site for TekVero (tekvero.pl) that reflects the "True Tech" brand promise: clean execution, transparent collaboration, and reliable delivery.
 
 ## Core Constraints
 - Visual direction:
@@ -70,7 +70,7 @@ Build all conversion-critical sections in final order.
 1. Hero Section
    - Headline: "Engineering-grade web production. Delivered on time."
    - Subheadline and dual CTA: "Get a Free Estimate" / "Let's Talk"
-2. Why Tekvero (Manifest / Marathon Metaphor)
+2. Why TekVero (Manifest / Marathon Metaphor)
    - Predictable Pace
    - Frictionless Collaboration
    - Validated Code

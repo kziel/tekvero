@@ -13,8 +13,38 @@
         --tv-bg-soft: #172554;
         --tv-accent: #10b981;
         --tv-text: #f8fafc;
-        --tv-muted: #64748b;
-        --tv-border: #334155;
+        --tv-text-soft: #cbd5e1;
+        --tv-muted: #94a3b8;
+        --tv-border: rgba(100, 116, 139, 0.32);
+        --tv-border-strong: rgba(100, 116, 139, 0.52);
+        --tv-accent-text: #34d399;
+        --tv-panel-bg: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.38) 100%);
+        --tv-card-bg: linear-gradient(185deg, rgba(15, 23, 42, 0.58), rgba(15, 23, 42, 0.3));
+        --tv-input-bg: rgba(15, 23, 42, 0.65);
+        --tv-focus: rgba(52, 211, 153, 0.9);
+        --tv-bg-radial-a: rgba(16, 185, 129, 0.18);
+        --tv-bg-radial-b: rgba(56, 189, 248, 0.16);
+        --tv-bg-mid: #111b34;
+        --tv-bg-end: #0c1428;
+    }
+
+    html[data-theme="light"] {
+        --tv-bg: #f8fafc;
+        --tv-bg-soft: #e2e8f0;
+        --tv-text: #0f172a;
+        --tv-text-soft: #1e293b;
+        --tv-muted: #475569;
+        --tv-border: rgba(15, 23, 42, 0.16);
+        --tv-border-strong: rgba(15, 23, 42, 0.28);
+        --tv-accent-text: #047857;
+        --tv-panel-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.92) 100%);
+        --tv-card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(241, 245, 249, 0.95) 100%);
+        --tv-input-bg: rgba(255, 255, 255, 0.95);
+        --tv-focus: rgba(5, 150, 105, 0.92);
+        --tv-bg-radial-a: rgba(16, 185, 129, 0.16);
+        --tv-bg-radial-b: rgba(56, 189, 248, 0.13);
+        --tv-bg-mid: #eef2ff;
+        --tv-bg-end: #e2e8f0;
     }
 
     html {
@@ -25,11 +55,12 @@
         min-height: 100vh;
         overflow-x: hidden;
         background:
-            radial-gradient(circle at 8% 12%, rgba(16, 185, 129, 0.18), transparent 28%),
-            radial-gradient(circle at 88% 78%, rgba(56, 189, 248, 0.16), transparent 32%),
-            linear-gradient(165deg, var(--tv-bg) 0%, #111b34 55%, #0c1428 100%);
+            radial-gradient(circle at 8% 12%, var(--tv-bg-radial-a), transparent 28%),
+            radial-gradient(circle at 88% 78%, var(--tv-bg-radial-b), transparent 32%),
+            linear-gradient(165deg, var(--tv-bg) 0%, var(--tv-bg-mid) 55%, var(--tv-bg-end) 100%);
         color: var(--tv-text);
         font-family: var(--font-sans);
+        transition: background 240ms ease, color 240ms ease;
     }
 
     ::selection {
@@ -41,7 +72,7 @@
     input:focus-visible,
     select:focus-visible,
     textarea:focus-visible {
-        outline: 2px solid rgba(52, 211, 153, 0.9);
+        outline: 2px solid var(--tv-focus);
         outline-offset: 2px;
     }
 
@@ -84,31 +115,149 @@
     }
 
     .tv-panel {
-        border: 1px solid rgba(100, 116, 139, 0.28);
-        background: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.38) 100%);
+        border: 1px solid var(--tv-border);
+        background: var(--tv-panel-bg);
         backdrop-filter: blur(8px);
         @apply rounded-3xl;
     }
 
     .tv-eyebrow {
-        @apply text-xs uppercase tracking-[0.24em] text-emerald-400;
+        color: var(--tv-accent-text);
+        @apply text-xs uppercase tracking-[0.24em];
     }
 
     .tv-h1 {
-        @apply text-4xl font-semibold tracking-tight text-slate-50 md:text-6xl;
+        color: var(--tv-text);
+        @apply text-4xl font-semibold tracking-tight md:text-6xl;
     }
 
     .tv-h2 {
-        @apply text-3xl font-semibold tracking-tight text-slate-50 md:text-4xl;
+        color: var(--tv-text);
+        @apply text-3xl font-semibold tracking-tight md:text-4xl;
     }
 
     .tv-intro {
-        @apply text-base leading-relaxed text-slate-300 md:text-lg;
+        color: var(--tv-text-soft);
+        @apply text-base leading-relaxed md:text-lg;
     }
 
     .tv-card {
-        border: 1px solid rgba(100, 116, 139, 0.35);
-        background: linear-gradient(185deg, rgba(15, 23, 42, 0.58), rgba(15, 23, 42, 0.3));
+        border: 1px solid var(--tv-border-strong);
+        background: var(--tv-card-bg);
         @apply rounded-2xl p-7;
+    }
+
+    .tv-logo-link {
+        color: var(--tv-text);
+    }
+
+    .tv-nav-link {
+        color: var(--tv-text-soft);
+        transition: color 180ms ease;
+    }
+
+    .tv-nav-link:hover {
+        color: color-mix(in srgb, var(--tv-accent) 82%, var(--tv-text) 18%);
+    }
+
+    .tv-nav-pill {
+        border: 1px solid var(--tv-border-strong);
+        color: var(--tv-text-soft);
+    }
+
+    .tv-nav-pill--active {
+        border-color: color-mix(in srgb, var(--tv-accent) 72%, transparent);
+        color: color-mix(in srgb, var(--tv-accent) 82%, var(--tv-text) 18%);
+    }
+
+    .tv-link-button {
+        border: 1px solid var(--tv-border-strong);
+        color: var(--tv-text);
+        transition: color 180ms ease, border-color 180ms ease;
+    }
+
+    .tv-link-button:hover {
+        border-color: color-mix(in srgb, var(--tv-accent) 72%, transparent);
+        color: color-mix(in srgb, var(--tv-accent) 82%, var(--tv-text) 18%);
+    }
+
+    .tv-theme-toggle {
+        border: 1px solid var(--tv-border-strong);
+        color: var(--tv-text);
+        background: color-mix(in srgb, var(--tv-bg-soft) 25%, transparent);
+        transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
+    }
+
+    .tv-theme-toggle:hover {
+        border-color: color-mix(in srgb, var(--tv-accent) 72%, transparent);
+    }
+
+    .tv-card-title {
+        color: var(--tv-text);
+    }
+
+    .tv-card-copy {
+        color: var(--tv-text-soft);
+    }
+
+    .tv-chip {
+        border: 1px solid var(--tv-border-strong);
+        color: var(--tv-text);
+    }
+
+    .tv-success {
+        border: 1px solid color-mix(in srgb, var(--tv-accent) 45%, transparent);
+        background: color-mix(in srgb, var(--tv-accent) 10%, transparent);
+        color: color-mix(in srgb, var(--tv-accent) 68%, var(--tv-text) 32%);
+    }
+
+    .tv-error {
+        border: 1px solid rgba(244, 63, 94, 0.4);
+        background: rgba(244, 63, 94, 0.08);
+        color: #fda4af;
+    }
+
+    html[data-theme="light"] .tv-error {
+        color: #be123c;
+    }
+
+    .tv-field-label {
+        color: var(--tv-text-soft);
+    }
+
+    .tv-field-input {
+        border: 1px solid var(--tv-border-strong);
+        background: var(--tv-input-bg);
+        color: var(--tv-text);
+    }
+
+    .tv-field-input:focus {
+        border-color: color-mix(in srgb, var(--tv-accent) 76%, transparent);
+    }
+
+    .tv-status-text {
+        color: var(--tv-muted);
+    }
+
+    .tv-list-title {
+        color: var(--tv-muted);
+    }
+
+    .tv-list-copy {
+        color: var(--tv-text-soft);
+    }
+
+    .tv-text-muted {
+        color: var(--tv-muted);
+    }
+
+    .tv-btn-secondary {
+        border: 1px solid var(--tv-border-strong);
+        color: var(--tv-text);
+    }
+
+    .tv-btn-secondary:hover {
+        border-color: color-mix(in srgb, var(--tv-accent) 72%, transparent);
+        color: color-mix(in srgb, var(--tv-accent) 82%, var(--tv-text) 18%);
     }
 }

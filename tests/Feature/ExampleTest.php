@@ -22,8 +22,10 @@ test('root redirect prefers locale cookie over browser language', function () {
 test('polish landing page loads with localized content', function () {
     $this->get('/pl')
         ->assertStatus(200)
-        ->assertSee('Tekvero | Inzynierska produkcja stron WWW', false)
-        ->assertSee('Dlaczego Tekvero')
+        ->assertSee('data-theme="dark"', false)
+        ->assertSee('data-theme-toggle', false)
+        ->assertSee('TekVero | Inzynierska produkcja stron WWW', false)
+        ->assertSee('Dlaczego TekVero')
         ->assertSee('hreflang="pl"', false)
         ->assertSee('hreflang="en"', false);
 });
@@ -31,8 +33,9 @@ test('polish landing page loads with localized content', function () {
 test('english landing page loads with localized content', function () {
     $this->get('/en')
         ->assertStatus(200)
-        ->assertSee('Tekvero | Engineering-grade web production', false)
-        ->assertSee('Why Tekvero')
+        ->assertSee('data-theme-toggle', false)
+        ->assertSee('TekVero | Engineering-grade web production', false)
+        ->assertSee('Why TekVero')
         ->assertSee('name="twitter:card"', false);
 });
 
@@ -42,7 +45,7 @@ test('sitemap contains polish and english locale urls', function () {
         ->assertHeader('Content-Type', 'application/xml; charset=UTF-8')
         ->assertSee('/pl', false)
         ->assertSee('/en', false)
-    ->assertSee('<lastmod>', false)
-    ->assertSee('<priority>1.0</priority>', false)
+        ->assertSee('<lastmod>', false)
+        ->assertSee('<priority>1.0</priority>', false)
         ->assertSee('<urlset', false);
 });

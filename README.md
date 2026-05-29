@@ -1,4 +1,4 @@
-# Tekvero Website
+# TekVero Website
 
 Single-page marketing website for tekvero.pl, built with Laravel Blade and Tailwind CSS.
 

@@ -1,10 +1,10 @@
-# Artifact 10: Tekvero Plan v2 (Kickoff Snapshot)
+# Artifact 10: TekVero Plan v2 (Kickoff Snapshot)
 
 ## Purpose
 Single source of truth for implementation kickoff of tekvero.pl, aligned to final stack and deployment policy.
 
 ## Project Goal
-Launch a high-performance, single-page Tekvero website that reflects engineering reliability, clean design, and frictionless delivery.
+Launch a high-performance, single-page TekVero website that reflects engineering reliability, clean design, and frictionless delivery.
 
 ## Final Architecture (Locked)
 - Hosting: iqhost.pl
@@ -34,7 +34,7 @@ Launch a high-performance, single-page Tekvero website that reflects engineering
 - Headline: Engineering-grade web production. Delivered on time.
 - Subheadline and two CTAs
 
-2. Why Tekvero (Manifest)
+2. Why TekVero (Manifest)
 - Predictable Pace
 - Frictionless Collaboration
 - Validated Code

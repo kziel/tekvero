@@ -14,8 +14,8 @@ return [
         'other' => 'Inne',
     ],
     'email' => [
-        'subject' => 'Nowe zapytanie Tekvero: :name',
-        'intro' => 'Nowe zapytanie ze strony Tekvero',
+        'subject' => 'Nowe zapytanie TekVero: :name',
+        'intro' => 'Nowe zapytanie ze strony TekVero',
         'labels' => [
             'name' => 'Nazwa / Firma',
             'scope' => 'Zakres projektu',

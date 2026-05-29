@@ -61,7 +61,7 @@ Translate the phase plan into execution-ready tasks with effort estimates and a 
 ## Phase 3: Landing Page Assembly (16-22h)
 ### Checklist
 - [ ] Build Hero section with dual CTA actions
-- [ ] Build Why Tekvero manifesto block
+- [ ] Build Why TekVero manifesto block
 - [ ] Build Services grid with 3 cards
 - [ ] Build Tech stack trust banner
 - [ ] Build contact form and validation UX
