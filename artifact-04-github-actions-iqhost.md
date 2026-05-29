@@ -1,7 +1,7 @@
 # Artifact 04: GitHub Actions CI/CD for iqhost.pl
 
 ## Purpose
-Provide a ready-to-use CI/CD baseline for Tekvero using GitHub Actions with shared-hosting-safe deployment steps.
+Provide a ready-to-use CI/CD baseline for TekVero using GitHub Actions with shared-hosting-safe deployment steps.
 
 ## Files Added
 - `.github/workflows/ci-deploy-iqhost.yml`

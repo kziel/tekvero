@@ -14,8 +14,8 @@ return [
         'other' => 'Other',
     ],
     'email' => [
-        'subject' => 'New Tekvero inquiry: :name',
-        'intro' => 'New inquiry from Tekvero website',
+        'subject' => 'New TekVero inquiry: :name',
+        'intro' => 'New inquiry from TekVero website',
         'labels' => [
             'name' => 'Name / Company',
             'scope' => 'Project Scope',

@@ -17,7 +17,7 @@ mkdir -p "$SHARED_PATH/bootstrap/cache"
 
 if [[ ! -f "$SHARED_PATH/.env" ]]; then
   cat > "$SHARED_PATH/.env.example" <<'EOF'
-APP_NAME=Tekvero
+APP_NAME=TekVero
 APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://tekvero.pl
@@ -45,7 +45,7 @@ MAIL_USERNAME=CHANGE_ME
 MAIL_PASSWORD=CHANGE_ME
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=hello@tekvero.pl
-MAIL_FROM_NAME="Tekvero"
+MAIL_FROM_NAME="TekVero"
 EOF
   echo "Created $SHARED_PATH/.env.example"
   echo "Create $SHARED_PATH/.env with real secrets before first deploy."

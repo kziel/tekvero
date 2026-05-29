@@ -2,8 +2,8 @@
 
 return [
     'meta' => [
-        'title' => 'Tekvero | Inzynierska produkcja stron WWW',
-        'description' => 'Tekvero tworzy wydajne landing page i strony firmowe z przewidywalnym procesem, zweryfikowanym kodem i realnym efektem biznesowym.',
+        'title' => 'TekVero | Inzynierska produkcja stron WWW',
+        'description' => 'TekVero tworzy wydajne landing page i strony firmowe z przewidywalnym procesem, zweryfikowanym kodem i realnym efektem biznesowym.',
         'og_description' => 'Produkcja stron one-page i witryn firmowych z naciskiem na przewidywalna realizacje i techniczna niezawodnosc.',
         'twitter_description' => 'Landing page i strony WWW budowane pod szybkie wdrozenie, jakosc i konwersje.',
     ],
@@ -20,18 +20,18 @@ return [
         'switch_label' => 'Przelacz jezyk na angielski',
     ],
     'nav' => [
-        'why' => 'Dlaczego Tekvero',
+        'why' => 'Dlaczego TekVero',
         'services' => 'Uslugi',
         'stack' => 'Stack',
         'contact' => 'Kontakt',
     ],
     'hero' => [
-        'eyebrow' => 'Tekvero Digital Production',
+        'eyebrow' => 'TekVero Digital Production',
         'title' => 'Inzynierska produkcja stron WWW. Dowozimy na czas.',
         'intro' => 'Projektujemy i wdrazamy landing page, ktore dzialaja w realnych warunkach biznesowych. Dostajesz jasny plan prac, szybkie petle feedbacku i kod gotowy na dalszy rozwoj.',
         'cta_primary' => 'Otrzymaj bezplatna wycene',
         'cta_secondary' => 'Zobacz nasze podejscie',
-        'side_title' => 'Dlaczego zespoly wybieraja Tekvero',
+        'side_title' => 'Dlaczego zespoly wybieraja TekVero',
         'side_points' => [
             'Plan realizacji jest konkretny, etapowany i widoczny od pierwszego dnia.',
             'Decyzje projektowe sluza konwersji, a nie przypadkowej dekoracji.',
@@ -39,7 +39,7 @@ return [
         ],
     ],
     'manifest' => [
-        'eyebrow' => 'Dlaczego Tekvero',
+        'eyebrow' => 'Dlaczego TekVero',
         'title' => 'Wiecej wykonania, mniej szumu',
         'intro' => 'Nasz model pracy jest prosty: mniej obietnic, wiecej standardow i lepszy rezultat.',
         'cards' => [
@@ -77,9 +77,9 @@ return [
         ],
     ],
     'stack' => [
-        'eyebrow' => 'Stack technologiczny',
+        'eyebrow' => 'Stos technologiczny',
         'title' => 'Sprawdzone narzedzia produkcyjne',
-        'intro' => 'Stack jest celowo prosty: szybkie iteracje, stabilny runtime i niski koszt operacyjny.',
+        'intro' => 'Nasz stos jest celowo prosty: szybkie iteracje, stabilny runtime i niski koszt operacyjny.',
     ],
     'contact' => [
         'eyebrow' => 'Kontakt',

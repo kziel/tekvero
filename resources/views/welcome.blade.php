@@ -26,7 +26,7 @@
         <link rel="alternate" href="{{ $plUrl }}" hreflang="x-default" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Tekvero" />
+        <meta property="og:site_name" content="TekVero" />
         <meta property="og:title" content="{{ __('landing.meta.title') }}" />
         <meta property="og:description" content="{{ __('landing.meta.og_description') }}" />
         <meta property="og:url" content="{{ $canonicalUrl }}" />
@@ -39,7 +39,7 @@
             {!! json_encode([
                 '@context' => 'https://schema.org',
                 '@type' => 'Organization',
-                'name' => 'Tekvero',
+                'name' => 'TekVero',
                 'url' => $canonicalUrl,
                 'description' => __('landing.schema.description'),
             ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}

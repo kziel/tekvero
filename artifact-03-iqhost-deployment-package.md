@@ -1,7 +1,7 @@
 # Artifact 03: iqhost.pl Deployment Package
 
 ## Purpose
-Provide a practical, plain-production deployment guide for Tekvero on iqhost.pl using Laravel + Blade + Tailwind 4 + MySQL + Redis.
+Provide a practical, plain-production deployment guide for TekVero on iqhost.pl using Laravel + Blade + Tailwind 4 + MySQL + Redis.
 
 ## Final Stack (Locked)
 - Hosting: iqhost.pl
@@ -41,7 +41,7 @@ Provide a practical, plain-production deployment guide for Tekvero on iqhost.pl 
 Copy this template and fill with real values.
 
 ```dotenv
-APP_NAME=Tekvero
+APP_NAME=TekVero
 APP_ENV=production
 APP_KEY=
 APP_DEBUG=false
@@ -73,7 +73,7 @@ MAIL_USERNAME=CHANGE_ME
 MAIL_PASSWORD=CHANGE_ME
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=hello@tekvero.pl
-MAIL_FROM_NAME="Tekvero"
+MAIL_FROM_NAME="TekVero"
 
 # Optional anti-spam tuning
 CONTACT_RATE_LIMIT=5

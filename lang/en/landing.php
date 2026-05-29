@@ -2,8 +2,8 @@
 
 return [
     'meta' => [
-        'title' => 'Tekvero | Engineering-grade web production',
-        'description' => 'Tekvero builds engineering-grade landing pages and business websites with predictable delivery, validated code, and measurable conversion outcomes.',
+        'title' => 'TekVero | Engineering-grade web production',
+        'description' => 'TekVero builds engineering-grade landing pages and business websites with predictable delivery, validated code, and measurable conversion outcomes.',
         'og_description' => 'Single-page and business website production with predictable delivery and technical reliability.',
         'twitter_description' => 'Landing page and website production focused on delivery speed, quality, and conversion.',
     ],
@@ -20,18 +20,18 @@ return [
         'switch_label' => 'Switch language to Polish',
     ],
     'nav' => [
-        'why' => 'Why Tekvero',
+        'why' => 'Why TekVero',
         'services' => 'Services',
         'stack' => 'Stack',
         'contact' => 'Contact',
     ],
     'hero' => [
-        'eyebrow' => 'Tekvero Digital Production',
+        'eyebrow' => 'TekVero Digital Production',
         'title' => 'Engineering-grade web production. Delivered on time.',
         'intro' => 'We design and ship landing pages that perform under real business pressure. You get transparent milestones, fast feedback loops, and code that is ready for long-term maintenance.',
         'cta_primary' => 'Get a Free Estimate',
         'cta_secondary' => 'See Our Approach',
-        'side_title' => 'Why teams choose Tekvero',
+        'side_title' => 'Why teams choose TekVero',
         'side_points' => [
             'Delivery plans are explicit, time-boxed, and visible from day one.',
             'Design choices are made for conversion, not decoration.',
@@ -39,7 +39,7 @@ return [
         ],
     ],
     'manifest' => [
-        'eyebrow' => 'Why Tekvero',
+        'eyebrow' => 'Why TekVero',
         'title' => 'Execution over noise',
         'intro' => 'Our operating model is simple: fewer promises, clearer standards, better outcomes.',
         'cards' => [

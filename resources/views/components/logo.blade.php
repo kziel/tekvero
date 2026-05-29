@@ -6,5 +6,5 @@
         <path d="M8 12H36V18H24V34H20V18H8V12Z" fill="#0F172A" />
         <path d="M10 22L22 34L34 22" stroke="#0F172A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
     </svg>
-    <span class="font-semibold tracking-tight text-xl">Tekvero</span>
+    <span class="font-semibold tracking-tight text-xl">TekVero</span>
 </a>
