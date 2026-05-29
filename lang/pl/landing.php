@@ -19,6 +19,10 @@ return [
         'switch_to' => 'EN',
         'switch_label' => 'Przelacz jezyk na angielski',
     ],
+    'theme' => [
+        'switch_to_light' => 'Jasny',
+        'switch_to_dark' => 'Ciemny',
+    ],
     'nav' => [
         'why' => 'Dlaczego TekVero',
         'services' => 'Uslugi',

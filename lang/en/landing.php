@@ -19,6 +19,10 @@ return [
         'switch_to' => 'PL',
         'switch_label' => 'Switch language to Polish',
     ],
+    'theme' => [
+        'switch_to_light' => 'Light',
+        'switch_to_dark' => 'Dark',
+    ],
     'nav' => [
         'why' => 'Why TekVero',
         'services' => 'Services',

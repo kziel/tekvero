@@ -11,7 +11,7 @@
     $heroPoints = trans('landing.hero.side_points');
 @endphp
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', $locale) }}">
+<html lang="{{ str_replace('_', '-', $locale) }}" data-theme="dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,6 +35,21 @@
         <meta name="twitter:title" content="{{ __('landing.meta.title') }}" />
         <meta name="twitter:description" content="{{ __('landing.meta.twitter_description') }}" />
 
+        <script>
+            (() => {
+                const storageKey = 'tekvero_theme';
+
+                try {
+                    const savedTheme = localStorage.getItem(storageKey);
+                    if (savedTheme === 'light') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                    }
+                } catch (_) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            })();
+        </script>
+
         <script type="application/ld+json">
             {!! json_encode([
                 '@context' => 'https://schema.org',
@@ -55,29 +70,41 @@
             <div class="tv-panel flex items-center justify-between rounded-2xl px-5 py-4 lg:px-7">
                 <x-logo />
                 <div class="flex items-center gap-3">
+                    <button
+                        type="button"
+                        data-theme-toggle
+                        data-label-light="{{ __('landing.theme.switch_to_light') }}"
+                        data-label-dark="{{ __('landing.theme.switch_to_dark') }}"
+                        class="tv-theme-toggle rounded-full px-4 py-2 text-xs font-semibold"
+                        aria-pressed="false"
+                        aria-label="{{ __('landing.theme.switch_to_light') }}"
+                    >
+                        <span data-theme-toggle-label>{{ __('landing.theme.switch_to_light') }}</span>
+                    </button>
+
                     <a
                         href="{{ route('landing', ['locale' => $switchLocale]) }}"
                         data-language-switch
-                        class="rounded-full border border-slate-500 px-4 py-2 text-xs font-semibold text-slate-100 hover:border-emerald-500 hover:text-emerald-300"
+                        class="tv-link-button rounded-full px-4 py-2 text-xs font-semibold"
                         aria-label="{{ __('landing.language.switch_label') }}"
                     >
                         {{ __('landing.language.switch_to') }}
                     </a>
 
                     <nav class="hidden items-center gap-8 text-sm text-slate-300 lg:flex" aria-label="{{ __('landing.a11y.main_nav') }}">
-                        <a href="#manifest" class="transition-colors hover:text-emerald-300">{{ __('landing.nav.why') }}</a>
-                        <a href="#services" class="transition-colors hover:text-emerald-300">{{ __('landing.nav.services') }}</a>
-                        <a href="#stack" class="transition-colors hover:text-emerald-300">{{ __('landing.nav.stack') }}</a>
-                        <a href="#contact" class="transition-colors hover:text-emerald-300">{{ __('landing.nav.contact') }}</a>
+                        <a href="#manifest" class="tv-nav-link">{{ __('landing.nav.why') }}</a>
+                        <a href="#services" class="tv-nav-link">{{ __('landing.nav.services') }}</a>
+                        <a href="#stack" class="tv-nav-link">{{ __('landing.nav.stack') }}</a>
+                        <a href="#contact" class="tv-nav-link">{{ __('landing.nav.contact') }}</a>
                     </nav>
                 </div>
             </div>
 
             <nav class="mt-4 flex flex-wrap gap-2 lg:hidden" aria-label="{{ __('landing.a11y.mobile_nav') }}">
-                <a href="#manifest" class="rounded-full border border-slate-600 px-4 py-2 text-xs font-medium text-slate-200">{{ __('landing.nav.why') }}</a>
-                <a href="#services" class="rounded-full border border-slate-600 px-4 py-2 text-xs font-medium text-slate-200">{{ __('landing.nav.services') }}</a>
-                <a href="#stack" class="rounded-full border border-slate-600 px-4 py-2 text-xs font-medium text-slate-200">{{ __('landing.nav.stack') }}</a>
-                <a href="#contact" class="rounded-full border border-emerald-500 px-4 py-2 text-xs font-medium text-emerald-300">{{ __('landing.nav.contact') }}</a>
+                <a href="#manifest" class="tv-nav-pill rounded-full px-4 py-2 text-xs font-medium">{{ __('landing.nav.why') }}</a>
+                <a href="#services" class="tv-nav-pill rounded-full px-4 py-2 text-xs font-medium">{{ __('landing.nav.services') }}</a>
+                <a href="#stack" class="tv-nav-pill rounded-full px-4 py-2 text-xs font-medium">{{ __('landing.nav.stack') }}</a>
+                <a href="#contact" class="tv-nav-pill tv-nav-pill--active rounded-full px-4 py-2 text-xs font-medium">{{ __('landing.nav.contact') }}</a>
             </nav>
         </header>
 
@@ -96,8 +123,8 @@
                         </div>
 
                         <aside class="tv-card space-y-6">
-                            <p class="text-sm uppercase tracking-[0.22em] text-slate-400">{{ __('landing.hero.side_title') }}</p>
-                            <ul class="space-y-3 text-slate-200">
+                            <p class="tv-list-title text-sm uppercase tracking-[0.22em]">{{ __('landing.hero.side_title') }}</p>
+                            <ul class="tv-list-copy space-y-3">
                                 @foreach ($heroPoints as $point)
                                     <li class="flex items-start gap-3">
                                         <span class="mt-2 h-2 w-2 rounded-full bg-emerald-400"></span>
@@ -143,12 +170,12 @@
                 :intro="__('landing.stack.intro')"
             >
                 <div class="tv-panel rounded-2xl p-6 lg:p-8">
-                    <div class="flex flex-wrap gap-3 text-sm font-medium text-slate-100">
-                        <span class="rounded-full border border-slate-600 px-4 py-2">Tailwind CSS 4</span>
-                        <span class="rounded-full border border-slate-600 px-4 py-2">Vanilla JavaScript</span>
-                        <span class="rounded-full border border-slate-600 px-4 py-2">Laravel</span>
-                        <span class="rounded-full border border-slate-600 px-4 py-2">MySQL</span>
-                        <span class="rounded-full border border-slate-600 px-4 py-2">Redis</span>
+                    <div class="flex flex-wrap gap-3 text-sm font-medium">
+                        <span class="tv-chip rounded-full px-4 py-2">Tailwind CSS 4</span>
+                        <span class="tv-chip rounded-full px-4 py-2">Vanilla JavaScript</span>
+                        <span class="tv-chip rounded-full px-4 py-2">Laravel</span>
+                        <span class="tv-chip rounded-full px-4 py-2">MySQL</span>
+                        <span class="tv-chip rounded-full px-4 py-2">Redis</span>
                     </div>
                 </div>
             </x-section>
@@ -161,13 +188,13 @@
             >
                 <div class="tv-panel rounded-3xl p-6 lg:p-10">
                     @if (session('contact_success'))
-                        <div class="mb-6 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-200" role="status" aria-live="polite">
+                        <div class="tv-success mb-6 rounded-xl px-4 py-3 text-sm" role="status" aria-live="polite">
                             {{ session('contact_success') }}
                         </div>
                     @endif
 
                     @error('contact')
-                        <div class="mb-6 rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200" role="alert">
+                        <div class="tv-error mb-6 rounded-xl px-4 py-3 text-sm" role="alert">
                             {{ $message }}
                         </div>
                     @enderror
@@ -177,16 +204,16 @@
                         <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
                         <div class="space-y-2">
-                            <label class="text-sm text-slate-300" for="name">{{ __('landing.contact.labels.name') }}</label>
-                            <input id="name" name="name" type="text" value="{{ old('name') }}" class="w-full rounded-xl border border-slate-600 bg-slate-900/60 px-4 py-3 text-slate-100 outline-none ring-0 transition focus:border-emerald-400" placeholder="{{ __('landing.contact.placeholders.name') }}" autocomplete="organization" required />
+                            <label class="tv-field-label text-sm" for="name">{{ __('landing.contact.labels.name') }}</label>
+                            <input id="name" name="name" type="text" value="{{ old('name') }}" class="tv-field-input w-full rounded-xl px-4 py-3 outline-none ring-0 transition" placeholder="{{ __('landing.contact.placeholders.name') }}" autocomplete="organization" required />
                             @error('name')
                                 <p class="text-sm text-rose-300" role="alert">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div class="space-y-2">
-                            <label class="text-sm text-slate-300" for="scope">{{ __('landing.contact.labels.scope') }}</label>
-                            <select id="scope" name="scope" class="w-full rounded-xl border border-slate-600 bg-slate-900/60 px-4 py-3 text-slate-100 outline-none ring-0 transition focus:border-emerald-400" required>
+                            <label class="tv-field-label text-sm" for="scope">{{ __('landing.contact.labels.scope') }}</label>
+                            <select id="scope" name="scope" class="tv-field-input w-full rounded-xl px-4 py-3 outline-none ring-0 transition" required>
                                 <option value="new-landing-page" @selected(old('scope') === 'new-landing-page')>{{ __('contact.scopes.new-landing-page') }}</option>
                                 <option value="website-redesign" @selected(old('scope') === 'website-redesign')>{{ __('contact.scopes.website-redesign') }}</option>
                                 <option value="other" @selected(old('scope') === 'other')>{{ __('contact.scopes.other') }}</option>
@@ -197,16 +224,16 @@
                         </div>
 
                         <div class="space-y-2">
-                            <label class="text-sm text-slate-300" for="budget">{{ __('landing.contact.labels.budget') }}</label>
-                            <input id="budget" name="budget" type="text" value="{{ old('budget') }}" class="w-full rounded-xl border border-slate-600 bg-slate-900/60 px-4 py-3 text-slate-100 outline-none ring-0 transition focus:border-emerald-400" placeholder="{{ __('landing.contact.placeholders.budget') }}" autocomplete="off" required />
+                            <label class="tv-field-label text-sm" for="budget">{{ __('landing.contact.labels.budget') }}</label>
+                            <input id="budget" name="budget" type="text" value="{{ old('budget') }}" class="tv-field-input w-full rounded-xl px-4 py-3 outline-none ring-0 transition" placeholder="{{ __('landing.contact.placeholders.budget') }}" autocomplete="off" required />
                             @error('budget')
                                 <p class="text-sm text-rose-300" role="alert">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div class="space-y-2 md:col-span-2">
-                            <label class="text-sm text-slate-300" for="message">{{ __('landing.contact.labels.message') }}</label>
-                            <textarea id="message" name="message" rows="5" class="w-full rounded-xl border border-slate-600 bg-slate-900/60 px-4 py-3 text-slate-100 outline-none ring-0 transition focus:border-emerald-400" placeholder="{{ __('landing.contact.placeholders.message') }}" autocomplete="off" required>{{ old('message') }}</textarea>
+                            <label class="tv-field-label text-sm" for="message">{{ __('landing.contact.labels.message') }}</label>
+                            <textarea id="message" name="message" rows="5" class="tv-field-input w-full rounded-xl px-4 py-3 outline-none ring-0 transition" placeholder="{{ __('landing.contact.placeholders.message') }}" autocomplete="off" required>{{ old('message') }}</textarea>
                             @error('message')
                                 <p class="text-sm text-rose-300" role="alert">{{ $message }}</p>
                             @enderror
@@ -214,24 +241,11 @@
 
                         <div class="md:col-span-2 flex flex-wrap items-center gap-4">
                             <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-emerald-400 transition-colors sm:w-auto">{{ __('landing.contact.submit') }}</button>
-                            <p id="contact-status" class="text-sm text-slate-400">{{ __('landing.contact.status') }}</p>
+                            <p id="contact-status" class="tv-status-text text-sm">{{ __('landing.contact.status') }}</p>
                         </div>
                     </form>
                 </div>
             </x-section>
         </main>
-
-        <script>
-            document.querySelectorAll('[data-language-switch]').forEach((link) => {
-                link.addEventListener('click', (event) => {
-                    if (!window.location.hash) {
-                        return;
-                    }
-
-                    event.preventDefault();
-                    window.location.href = link.getAttribute('href') + window.location.hash;
-                });
-            });
-        </script>
     </body>
 </html>
