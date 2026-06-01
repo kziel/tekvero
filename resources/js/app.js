@@ -1,4 +1,7 @@
 const THEME_STORAGE_KEY = 'tekvero_theme';
+const COOKIE_CONSENT_ACCEPTED = 'accepted';
+
+const getCookieConsentState = () => document.documentElement.dataset.cookieConsent || 'unknown';
 
 const applyTheme = (theme, toggleButton) => {
 	const normalizedTheme = theme === 'light' ? 'light' : 'dark';
@@ -29,6 +32,14 @@ const initThemeToggle = () => {
 		return;
 	}
 
+	if (getCookieConsentState() !== COOKIE_CONSENT_ACCEPTED) {
+		try {
+			localStorage.removeItem(THEME_STORAGE_KEY);
+		} catch (_) {
+			// Ignore storage failures.
+		}
+	}
+
 	const activeTheme = document.documentElement.getAttribute('data-theme') || 'dark';
 	applyTheme(activeTheme, toggleButton);
 
@@ -38,10 +49,12 @@ const initThemeToggle = () => {
 
 		applyTheme(next, toggleButton);
 
-		try {
-			localStorage.setItem(THEME_STORAGE_KEY, next);
-		} catch (_) {
-			// Ignore storage failures and keep in-memory theme switch behavior.
+		if (getCookieConsentState() === COOKIE_CONSENT_ACCEPTED) {
+			try {
+				localStorage.setItem(THEME_STORAGE_KEY, next);
+			} catch (_) {
+				// Ignore storage failures and keep in-memory theme switch behavior.
+			}
 		}
 	});
 };
@@ -59,5 +72,19 @@ const initLanguageSwitchHashPreservation = () => {
 	});
 };
 
+const initConsentBannerControls = () => {
+	const banner = document.querySelector('[data-consent-banner]');
+	if (!banner) {
+		return;
+	}
+
+	document.querySelectorAll('[data-consent-open]').forEach((button) => {
+		button.addEventListener('click', () => {
+			banner.classList.remove('hidden');
+		});
+	});
+};
+
 initThemeToggle();
 initLanguageSwitchHashPreservation();
+initConsentBannerControls();

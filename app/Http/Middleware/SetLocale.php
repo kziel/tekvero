@@ -22,7 +22,11 @@ class SetLocale
         }
 
         app()->setLocale($locale);
-        Cookie::queue(Cookie::forever('tekvero_locale', $locale));
+
+        $cookieConsent = (string) $request->cookie('tekvero_cookie_consent', '');
+        if ($cookieConsent === 'accepted') {
+            Cookie::queue(Cookie::forever('tekvero_locale', $locale));
+        }
 
         return $next($request);
     }
