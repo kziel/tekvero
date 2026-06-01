@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CookieConsentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', function () {
@@ -40,9 +41,10 @@ Route::get('/sitemap.xml', function () {
 
 Route::get('/', function () {
     $supportedLocales = ['pl', 'en'];
+    $cookieConsent = request()->cookie('tekvero_cookie_consent');
 
     $localeFromCookie = request()->cookie('tekvero_locale');
-    if (is_string($localeFromCookie) && in_array($localeFromCookie, $supportedLocales, true)) {
+    if ($cookieConsent === 'accepted' && is_string($localeFromCookie) && in_array($localeFromCookie, $supportedLocales, true)) {
         return redirect()->route('landing', ['locale' => $localeFromCookie]);
     }
 
@@ -59,6 +61,13 @@ Route::prefix('{locale}')
         Route::get('/', function () {
             return view('welcome');
         })->name('landing');
+
+        Route::get('/cookie-policy', function () {
+            return view('cookie-policy');
+        })->name('cookie.policy');
+
+        Route::post('/cookie-consent', [CookieConsentController::class, 'update'])
+            ->name('cookie.consent.update');
 
         Route::post('/contact', [ContactController::class, 'store'])
             ->middleware('throttle:contact')

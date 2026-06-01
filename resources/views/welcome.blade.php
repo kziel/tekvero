@@ -9,9 +9,11 @@
     $manifestCards = trans('landing.manifest.cards');
     $serviceCards = trans('landing.services.cards');
     $heroPoints = trans('landing.hero.side_points');
+    $cookieConsent = request()->cookie('tekvero_cookie_consent');
+    $hasConsentChoice = in_array($cookieConsent, ['accepted', 'rejected'], true);
 @endphp
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', $locale) }}" data-theme="dark">
+<html lang="{{ str_replace('_', '-', $locale) }}" data-theme="dark" data-cookie-consent="{{ is_string($cookieConsent) ? $cookieConsent : 'unknown' }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,6 +40,12 @@
         <script>
             (() => {
                 const storageKey = 'tekvero_theme';
+                const consentState = document.documentElement.dataset.cookieConsent;
+
+                if (consentState !== 'accepted') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    return;
+                }
 
                 try {
                     const savedTheme = localStorage.getItem(storageKey);
@@ -247,5 +255,45 @@
                 </div>
             </x-section>
         </main>
+
+        <footer class="pb-8">
+            <div class="tv-container">
+                <div class="tv-panel flex flex-wrap items-center justify-between gap-3 rounded-2xl px-5 py-4 lg:px-6">
+                    <p class="tv-text-muted text-sm">{{ __('landing.footer.copyright', ['year' => now()->year]) }}</p>
+                    <a href="{{ route('cookie.policy', ['locale' => $locale]) }}" class="tv-link-button rounded-full px-4 py-2 text-xs font-semibold">
+                        {{ __('landing.footer.cookie_policy') }}
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+        <div
+            data-consent-banner
+            class="{{ $hasConsentChoice ? 'hidden ' : '' }}fixed inset-x-4 bottom-4 z-50 mx-auto w-full max-w-3xl"
+            role="dialog"
+            aria-live="polite"
+            aria-label="{{ __('landing.consent.banner_title') }}"
+        >
+            <div class="tv-panel space-y-4 rounded-2xl px-5 py-4 lg:px-6">
+                <p class="tv-card-title text-sm font-semibold uppercase tracking-[0.16em]">{{ __('landing.consent.banner_title') }}</p>
+                <p class="tv-card-copy text-sm leading-relaxed">{{ __('landing.consent.banner_text') }}</p>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <form method="POST" action="{{ route('cookie.consent.update', ['locale' => $locale]) }}" class="contents">
+                        @csrf
+                        <button type="submit" name="consent" value="accepted" class="inline-flex items-center justify-center rounded-full bg-emerald-500 px-5 py-2 text-sm font-semibold text-slate-950 hover:bg-emerald-400 transition-colors">
+                            {{ __('landing.consent.accept') }}
+                        </button>
+                        <button type="submit" name="consent" value="rejected" class="tv-btn-secondary inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-semibold transition-colors">
+                            {{ __('landing.consent.reject') }}
+                        </button>
+                    </form>
+
+                    <a href="{{ route('cookie.policy', ['locale' => $locale]) }}" class="tv-link-button rounded-full px-4 py-2 text-xs font-semibold">
+                        {{ __('landing.consent.policy_link') }}
+                    </a>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

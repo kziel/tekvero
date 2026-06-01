@@ -23,6 +23,21 @@ return [
         'switch_to_light' => 'Light',
         'switch_to_dark' => 'Dark',
     ],
+    'consent' => [
+        'manage' => 'Cookies',
+        'banner_title' => 'Cookie settings',
+        'banner_text' => 'We use strictly necessary cookies to run the site. Optional preference cookies store your language and theme choice only if you accept.',
+        'accept' => 'Accept preferences',
+        'reject' => 'Reject preferences',
+        'policy_link' => 'Read cookie policy',
+        'policy_title' => 'Cookie Policy',
+        'policy_intro' => 'This page explains how TekVero uses cookies and how you can control your consent choices.',
+        'necessary_title' => 'Strictly necessary cookies',
+        'necessary_text' => 'These cookies keep essential website functions working, such as consent state and security related behavior.',
+        'preferences_title' => 'Preference cookies (optional)',
+        'preferences_text' => 'If accepted, we store your language and theme choice to improve usability on future visits.',
+        'back_to_site' => 'Back to site',
+    ],
     'nav' => [
         'why' => 'Why TekVero',
         'services' => 'Services',
@@ -96,11 +111,15 @@ return [
             'message' => 'Message',
         ],
         'placeholders' => [
-            'name' => 'Acme Inc.',
+            'name' => 'Name Inc.',
             'budget' => '10k-25k PLN',
             'message' => 'Tell us about your timeline, goals, and current constraints.',
         ],
         'submit' => 'Send Inquiry',
         'status' => 'Response target: within one business day.',
+    ],
+    'footer' => [
+        'copyright' => 'Copyright :year. Site prepared by TekVero.',
+        'cookie_policy' => 'Cookie Policy',
     ],
 ];

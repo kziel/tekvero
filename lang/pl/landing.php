@@ -23,6 +23,21 @@ return [
         'switch_to_light' => 'Jasny',
         'switch_to_dark' => 'Ciemny',
     ],
+    'consent' => [
+        'manage' => 'Cookies',
+        'banner_title' => 'Ustawienia cookies',
+        'banner_text' => 'Uzywamy niezbednych cookies do dzialania strony. Opcjonalne cookies preferencji zapisuja jezyk i motyw tylko po Twojej zgodzie.',
+        'accept' => 'Akceptuj preferencje',
+        'reject' => 'Odrzuc preferencje',
+        'policy_link' => 'Przeczytaj polityke cookies',
+        'policy_title' => 'Polityka Cookies',
+        'policy_intro' => 'Na tej stronie wyjasniamy, jak TekVero korzysta z cookies i jak mozesz zarzadzac zgoda.',
+        'necessary_title' => 'Niezbedne cookies',
+        'necessary_text' => 'Te cookies sa wymagane do dzialania kluczowych funkcji strony, np. zapisu stanu zgody i zabezpieczen.',
+        'preferences_title' => 'Cookies preferencji (opcjonalne)',
+        'preferences_text' => 'Po akceptacji zapisujemy Twoj wybor jezyka i motywu, aby poprawic wygode kolejnych wizyt.',
+        'back_to_site' => 'Powrot do strony',
+    ],
     'nav' => [
         'why' => 'Dlaczego TekVero',
         'services' => 'Uslugi',
@@ -96,11 +111,15 @@ return [
             'message' => 'Wiadomosc',
         ],
         'placeholders' => [
-            'name' => 'Acme Sp. z o.o.',
+            'name' => 'Nazwa Sp. z o.o.',
             'budget' => '10k-25k PLN',
             'message' => 'Napisz o terminie, celach i najwazniejszych ograniczeniach projektu.',
         ],
         'submit' => 'Wyslij zapytanie',
         'status' => 'Odpowiedz zwykle w ciagu jednego dnia roboczego.',
+    ],
+    'footer' => [
+        'copyright' => 'Copyright :year. Strona przygotowana przez TekVero.',
+        'cookie_policy' => 'Polityka Cookies',
     ],
 ];
