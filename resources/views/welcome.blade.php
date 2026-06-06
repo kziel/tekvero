@@ -179,9 +179,11 @@
             >
                 <div class="tv-panel rounded-2xl p-6 lg:p-8">
                     <div class="flex flex-wrap gap-3 text-sm font-medium">
+                        <span class="tv-chip rounded-full px-4 py-2">Laravel</span>
+                        <span class="tv-chip rounded-full px-4 py-2">PHP</span>
+                        <span class="tv-chip rounded-full px-4 py-2">Pure HTML</span>
                         <span class="tv-chip rounded-full px-4 py-2">Tailwind CSS 4</span>
                         <span class="tv-chip rounded-full px-4 py-2">Vanilla JavaScript</span>
-                        <span class="tv-chip rounded-full px-4 py-2">Laravel</span>
                         <span class="tv-chip rounded-full px-4 py-2">MySQL</span>
                         <span class="tv-chip rounded-full px-4 py-2">Redis</span>
                     </div>

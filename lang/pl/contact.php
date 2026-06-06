@@ -2,11 +2,11 @@
 
 return [
     'success' => [
-        'submitted' => 'Dziekujemy! Twoje zapytanie zostalo przyjete. Wkrotce wrocimy z odpowiedzia.',
+        'submitted' => 'Dziękujemy! Twoje zapytanie zostało przyjęte. Wkrótce wrócimy z odpowiedzią.',
     ],
     'errors' => [
-        'delivery_failed' => 'Nie udalo sie dostarczyc wiadomosci. Sprobuj ponownie za chwile.',
-        'spam' => 'Wykryto blad weryfikacji antyspamowej. Sprobuj ponownie.',
+        'delivery_failed' => 'Nie udało się dostarczyć wiadomości. Spróbuj ponownie za chwilę.',
+        'spam' => 'Wykryto błąd weryfikacji antyspamowej. Spróbuj ponownie.',
     ],
     'scopes' => [
         'new-landing-page' => 'Nowy landing page',
@@ -19,17 +19,17 @@ return [
         'labels' => [
             'name' => 'Nazwa / Firma',
             'scope' => 'Zakres projektu',
-            'budget' => 'Zakres budzetu',
-            'message' => 'Wiadomosc',
-            'locale' => 'Jezyk',
+            'budget' => 'Zakres budżetu',
+            'message' => 'Wiadomość',
+            'locale' => 'Język',
         ],
     ],
     'validation' => [
-        'name_required' => 'Podaj nazwe lub firme.',
+        'name_required' => 'Podaj nazwę lub firmę.',
         'scope_required' => 'Wybierz zakres projektu.',
-        'scope_in' => 'Wybierz jedna z dostepnych opcji zakresu.',
-        'budget_required' => 'Podaj zakres budzetu.',
-        'message_required' => 'Uzupelnij szczegoly projektu.',
-        'message_min' => 'Wiadomosc powinna miec co najmniej :min znakow.',
+        'scope_in' => 'Wybierz jedną z dostępnych opcji zakresu.',
+        'budget_required' => 'Podaj zakres budżetu.',
+        'message_required' => 'Uzupełnij szczegóły projektu.',
+        'message_min' => 'Wiadomość powinna mieć co najmniej :min znaków.',
     ],
 ];
